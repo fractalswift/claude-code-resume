@@ -1,0 +1,29 @@
+{
+  "name": "claude-session-manager",
+  "version": "1.0.0",
+  "description": "A terminal UI for browsing and resuming Claude sessions",
+  "module": "src/index.ts",
+  "type": "module",
+  "license": "MIT",
+  "keywords": ["claude", "ai", "sessions", "cli", "tui"],
+  "bin": {
+    "cs": "./bin/cs"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@opentui/core": "0.4.2",
+    "effect": "4.0.0-beta.83"
+  }
+}

@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -e
+
+# Resolve symlinks to find the repo root (works on macOS without coreutils)
+_cs_path="${BASH_SOURCE[0]}"
+while [ -L "$_cs_path" ]; do
+  _cs_dir="$(cd "$(dirname "$_cs_path")" && pwd)"
+  _cs_path="$(readlink "$_cs_path")"
+  [[ "$_cs_path" != /* ]] && _cs_path="$_cs_dir/$_cs_path"
+done
+_cs_repo="$(cd "$(dirname "$_cs_path")/.." && pwd)"
+
+# Temp file for the selected session info
+_cs_tmp="$(mktemp /tmp/cs-result.XXXXXX)"
+trap 'rm -f "$_cs_tmp"' EXIT
+
+# Run the session picker — it writes "sessionId\tcwd" to the temp file, then exits.
+# All its threads (including opentui's native stdin thread) die with the process.
+CS_OUTPUT_FILE="$_cs_tmp" bun run "$_cs_repo/src/index.ts"
+
+result="$(cat "$_cs_tmp")"
+[ -z "$result" ] && exit 0
+
+session_id="${result%%$'\t'*}"
+cwd="${result#*$'\t'}"
+
+# Change to the session's working directory if present
+[ -n "$cwd" ] && [ "$cwd" != "null" ] && cd "$cwd" 2>/dev/null || true
+
+# exec replaces this shell process with claude — one process, clean stdin
+exec claude --resume "$session_id"
