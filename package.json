@@ -1,6 +1,6 @@
 {
   "name": "claude-code-resume",
-  "version": "1.0.0",
+  "version": "1.0.13",
   "description": "A terminal UI for browsing and resuming Claude sessions",
   "module": "src/index.ts",
   "type": "module",
