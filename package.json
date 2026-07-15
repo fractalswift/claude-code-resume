@@ -1,5 +1,5 @@
 {
-  "name": "claude-session-manager",
+  "name": "claude-code-resume",
   "version": "1.0.0",
   "description": "A terminal UI for browsing and resuming Claude sessions",
   "module": "src/index.ts",

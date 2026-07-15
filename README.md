@@ -1,6 +1,6 @@
-# Claude Session Manager
+# Claude Code Resume
 
-A terminal UI for browsing and resuming Claude sessions.
+A terminal UI for browsing and resuming Claude Code sessions.
 
 ## Requirements
 
@@ -10,7 +10,7 @@ A terminal UI for browsing and resuming Claude sessions.
 ## Install
 
 ```sh
-bun add -g claude-session-manager
+bun add -g claude-code-resume
 ```
 
 ## Usage
